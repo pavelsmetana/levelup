@@ -3,6 +3,7 @@
 class Shape
 {
     protected string $color = "blue";
+
     public function calcS()
     {
 

@@ -24,10 +24,10 @@ echo $circle->calcS();
 * @return void
 */
 function calcArea(array $shapes) {
-foreach ($shapes as $shape) {
-echo $shape->getColor();
-echo "</br>";
-}
+    foreach ($shapes as $shape) {
+    echo $shape->getColor();
+    echo "</br>";
+    }
 }
 
 $shapes = [

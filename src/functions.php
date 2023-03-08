@@ -7,7 +7,6 @@ function upload() {
 }
 
 function renderHtml(string $file, array $data = []){
-
     extract($data);
 
     ob_start();
@@ -40,9 +39,7 @@ function listFiles(): array{
     return $result;
 }
 
-
-function auth_check(): bool //проверяет авторизован ли пользователь
-{
+function auth_check(): bool {//проверяет авторизован ли пользователь
     if(isset($_SESSION["status"]) && $_SESSION["status"] === "authorised"){
         return true;
     } else {
@@ -50,24 +47,21 @@ function auth_check(): bool //проверяет авторизован ли п�
     }
 }
 
-function authorize(string $login, string $password){    //функция авторизации, получает логин и пароль
-
+function authorize(string $login, string $password) {    //функция авторизации, получает логин и пароль
     $truelogin = "Deniska";    //это надо проверять из БД в будущем
     $truepassword = "Rediska";
 
     $backurl = $_REQUEST['backurl'];
 
-    if ($backurl === "/login") :
+    if ($backurl === "/login") {
         $backurl = "/";
-    endif;
+    }
 
     if ($login === $truelogin && $password === $truepassword) { //если переданный в функцию логин и пароль совпадают:
         $_SESSION["status"] = "authorised";                     //записываем в Сессию статус Авторайзед
         header("Location: $backurl");                   //и отправляем юзера туда откуда пришёл
-
         exit();
-    }
-    else {
+    } else {
         $_SESSION["status"] = "not authorized";
         $_SESSION["message"] = "Wrong Login or Password";
         header("Location: /login");

@@ -1,10 +1,12 @@
 <?php
 
 $request = $_SERVER["REQUEST_URI"] ?? "/";
+
 if($request === "/test"){
     echo renderHtml("page1");
     exit;
 }
+
 if ($request === "/login"){
     echo renderHtml("login");
     exit;
@@ -40,7 +42,6 @@ if ($request === "/file-upload"){
 if ($request === "/about"){
     echo renderHtml("about");
 }
-
 
 if ($request === "/contacts"){
     echo renderHtml("contacts");
