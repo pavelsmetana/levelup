@@ -2,11 +2,11 @@
 
 $request = $_SERVER["REQUEST_URI"] ?? "/";
 if($request === "/test"){
-    echo renderhtml("page1");
+    echo renderHtml("page1");
     exit;
 }
 if ($request === "/login"){
-    echo renderhtml("login");
+    echo renderHtml("login");
     exit;
 }
 
@@ -22,13 +22,30 @@ if ($request === "/auth"){
     exit;
 }
 
+if ($request === "/view-upload"){
+    echo renderHtml("view-upload");
+    exit;
+}
+
+if ($request === "/view-files"){
+    echo renderHtml("list", ["files" => listFiles()]);
+    exit;
+}
+
+if ($request === "/file-upload"){
+    upload();
+    exit;
+}
+
 if ($request === "/about"){
-    echo renderhtml("about");
+    echo renderHtml("about");
 }
 
 
 if ($request === "/contacts"){
-    echo renderhtml("contacts");
+    echo renderHtml("contacts");
 }
 
-echo renderhtml("index");
+if ($request === "/"){
+    echo renderHtml("index");
+}

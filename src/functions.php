@@ -1,7 +1,13 @@
 <?php
 
-function renderhtml(string $file, array $data = []){
-    include_once "view/menu.php"; //тут просто ссылки меню в отдельном файле:)
+function upload() {
+    if (isset($_FILES["myfile"])) {
+        move_uploaded_file($_FILES["myfile"]["tmp_name"], "../public/upload/" . $_FILES["myfile"]["name"]);
+    }
+}
+
+function renderHtml(string $file, array $data = []){
+
     extract($data);
 
     ob_start();
@@ -12,12 +18,34 @@ function renderhtml(string $file, array $data = []){
 
     return $result;
 }
+
+function listFiles(): array{
+    $files = scandir("../public/upload");
+
+    $result = [];
+
+    foreach ($files as $file) {
+        if ($file === ".") {
+            continue;
+        }
+
+        if ($file === "..") {
+            continue;
+        }
+
+        $result[] = $file;
+        $result = pathinfo($file);
+    }
+
+    return $result;
+}
+
+
 function auth_check(): bool //проверяет авторизован ли пользователь
 {
     if(isset($_SESSION["status"]) && $_SESSION["status"] === "authorised"){
         return true;
-    }
-    else {
+    } else {
         return false;
     }
 }
@@ -27,10 +55,15 @@ function authorize(string $login, string $password){    //функция авт�
     $truelogin = "Deniska";    //это надо проверять из БД в будущем
     $truepassword = "Rediska";
 
-    $referer = $_SESSION['referer'];    //записываем из Сессии путь откуда юзер пришёл. В Сессию его записали в логин.пхп
+    $backurl = $_REQUEST['backurl'];
+
+    if ($backurl === "/login") :
+        $backurl = "/";
+    endif;
+
     if ($login === $truelogin && $password === $truepassword) { //если переданный в функцию логин и пароль совпадают:
         $_SESSION["status"] = "authorised";                     //записываем в Сессию статус Авторайзед
-        header("Location: $referer");                   //и отправляем юзера туда откуда пришёл
+        header("Location: $backurl");                   //и отправляем юзера туда откуда пришёл
 
         exit();
     }
