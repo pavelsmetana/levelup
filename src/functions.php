@@ -4,6 +4,7 @@ function upload() {
     if (isset($_FILES["myfile"])) {
         move_uploaded_file($_FILES["myfile"]["tmp_name"], "../public/upload/" . $_FILES["myfile"]["name"]);
     }
+    header("Location: /");
 }
 
 function renderHtml(string $file, array $data = []){
@@ -33,7 +34,7 @@ function listFiles(): array{
         }
 
         $result[] = $file;
-        $result = pathinfo($file);
+;
     }
 
     return $result;

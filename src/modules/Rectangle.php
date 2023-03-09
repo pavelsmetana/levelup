@@ -11,6 +11,12 @@ class Rectangle extends Shape
         return "black";
     }
 
+    public function __construct(float $width, float $height)
+    {
+        $this->width = $width;
+        $this->height = $height;
+    }
+
     public function calcS()
     {
         return $this->width * $this->height;
