@@ -1,13 +1,14 @@
 <?php
 
-function upload() {
-    if (isset($_FILES["myfile"])) {
-        move_uploaded_file($_FILES["myfile"]["tmp_name"], "../public/upload/" . $_FILES["myfile"]["name"]);
-    }
-    header("Location: /");
-}
+//function upload() {   //всё переехало в FileController
+//    if (isset($_FILES["myfile"])) {
+//        move_uploaded_file($_FILES["myfile"]["tmp_name"], "../public/upload/" . $_FILES["myfile"]["name"]);
+//    }
+//    header("Location: /uploads");
+//}
 
-function renderHtml(string $file, array $data = []){
+function renderHtml(string $file, array $data = []) : string
+{
     extract($data);
 
     ob_start();
@@ -19,26 +20,6 @@ function renderHtml(string $file, array $data = []){
     return $result;
 }
 
-function listFiles(): array{
-    $files = scandir("../public/upload");
-
-    $result = [];
-
-    foreach ($files as $file) {
-        if ($file === ".") {
-            continue;
-        }
-
-        if ($file === "..") {
-            continue;
-        }
-
-        $result[] = $file;
-;
-    }
-
-    return $result;
-}
 
 function auth_check(): bool {//проверяет авторизован ли пользователь
     if(isset($_SESSION["status"]) && $_SESSION["status"] === "authorised"){
@@ -69,7 +50,3 @@ function authorize(string $login, string $password) {    //функция авт
     }
 }
 
-function logout (){
-    session_destroy();
-    header("Location: /");
-}

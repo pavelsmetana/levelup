@@ -10,6 +10,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 RUN pecl install xdebug
 
+RUN apt update && apt install -y git
+
 COPY ./user-config.ini $PHP_INI_DIR/conf.d/
 COPY ./xdebug.ini $PHP_INI_DIR/conf.d/
 

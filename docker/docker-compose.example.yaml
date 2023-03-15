@@ -54,6 +54,7 @@ services:
     working_dir: /www
     user: $DOCKER_USER
     volumes:
+      - ~/.composer:/.composer
       - ..:/www
     networks:
       blank-network:
