@@ -1,11 +1,5 @@
 <?php
 
-//function upload() {   //всё переехало в FileController
-//    if (isset($_FILES["myfile"])) {
-//        move_uploaded_file($_FILES["myfile"]["tmp_name"], "../public/upload/" . $_FILES["myfile"]["name"]);
-//    }
-//    header("Location: /uploads");
-//}
 
 function renderHtml(string $file, array $data = []) : string
 {

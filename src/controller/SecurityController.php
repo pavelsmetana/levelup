@@ -5,13 +5,13 @@ namespace App\controller;
 class SecurityController
 {
 
-    public function login()
+    public function login(): void
     {
         echo renderHtml("login");
         exit;
     }
 
-    public function auth()
+    public function auth(): void
     {
         $login = $_REQUEST['login'] ?? "";
         $password = $_REQUEST['password'] ?? "";
@@ -19,10 +19,9 @@ class SecurityController
         exit;
     }
 
-
-    public function logout (){
+    public function logout (): void
+    {
         session_destroy();
         header("Location: /");
     }
-
 }

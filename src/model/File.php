@@ -1,11 +1,12 @@
 <?php
 
-namespace App\controller;
+namespace App\model;
 
 class File
 {
     public const UPLOAD_PATH = "../public/upload/";
-    function listFiles(): array
+
+    public function listFiles(): array
     {
         $files = scandir(self::UPLOAD_PATH);
 
@@ -25,4 +26,10 @@ class File
 
         return $result;
     }
+
+    public function remove(string $filename): void
+    {
+        unlink(self::UPLOAD_PATH . $filename);
+    }
+
 }
