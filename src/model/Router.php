@@ -17,17 +17,18 @@ class Router
 
     public function execute(string $uri)
     {
-        foreach ($this->routes as $route) {
-//          if ($uri === $route->getPath()) {
-            if(preg_match("~" . $route->getPath() . "~", $uri, $matches)) {
-                $object = new ($route->getClassName())();
-                unset($matches[0]);
-                call_user_func_array([$object, $route->getMethod()], $matches);
-//                $object->{$route->getMethod()}();
-
-                exit();
-
+        try {
+            foreach ($this->routes as $route) {
+                if(preg_match("~" . $route->getPath() . "~", $uri, $matches)) {
+                    $object = new ($route->getClassName())();
+                    unset($matches[0]);
+                    call_user_func_array([$object, $route->getMethod()], $matches);
+                    exit();
+                }
             }
+        } catch (\Throwable $e){
+            echo "FUNCTION ERROR! ". $e->getMessage();
+            exit();
         }
     }
 }

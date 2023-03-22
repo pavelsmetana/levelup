@@ -2,6 +2,8 @@
 
 namespace App\model;
 
+use Symfony\Component\Filesystem\Filesystem;
+
 class File
 {
     public const UPLOAD_PATH = "../public/upload/";
@@ -32,4 +34,8 @@ class File
         unlink(self::UPLOAD_PATH . $filename);
     }
 
+    public function saveFile(string $file)
+    {
+        echo "saveFile";
+    }
 }
