@@ -27,7 +27,7 @@ class Router
                 }
             }
         } catch (\Throwable $e){
-            echo "FUNCTION ERROR! ". $e->getMessage();
+            echo $e->getMessage();
             exit();
         }
     }
