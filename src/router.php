@@ -1,9 +1,10 @@
 <?php
 
 use App\controller\DefaultController;
+use App\controller\HttpController;
 use App\controller\SecurityController;
 use App\controller\FileController;
-use App\controller\Controller;
+use App\controller\TestController;
 use App\model\Route;
 use App\model\Router;
 
@@ -22,6 +23,10 @@ $router = (new Router())
     ->addRoute(new Route("^\/clearfiles$", FileController::class, "clear"))
     ->addRoute(new Route("^\/$", DefaultController::class, "index"))
     ->addRoute(new Route("^\/remove-file/(.+)$", FileController::class, "removeFile"))
+    ->addRoute(new Route("^\/downloadimagespage$", DefaultController::class, "page"))
+    ->addRoute(new Route("^\/downloadpage", HttpController::class, "downloadimages"))
+    ->addRoute(new Route("^\/test", TestController::class, "showStudents"))
+    ->addRoute(new Route("^\/addstudent", TestController::class, "addStudent"))
 ;
 
 $router->execute($request);
